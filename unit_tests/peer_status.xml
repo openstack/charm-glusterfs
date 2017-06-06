@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<cliOutput>
+  <opRet>0</opRet>
+  <opErrno>0</opErrno>
+  <opErrstr/>
+  <peerStatus>
+    <peer>
+      <uuid>663bbc5b-c9b4-4a02-8b56-85e05e1b01c8</uuid>
+      <hostname>172.31.12.7</hostname>
+      <hostnames>
+        <hostname>172.31.12.7</hostname>
+      </hostnames>
+      <connected>1</connected>
+      <state>3</state>
+      <stateStr>Peer in Cluster</stateStr>
+    </peer>
+    <peer>
+      <uuid>15af92ad-ae64-4aba-89db-73730f2ca6ec</uuid>
+      <hostname>172.31.21.242</hostname>
+      <hostnames>
+        <hostname>172.31.21.242</hostname>
+      </hostnames>
+      <connected>1</connected>
+      <state>3</state>
+      <stateStr>Peer in Cluster</stateStr>
+    </peer>
+  </peerStatus>
+</cliOutput>

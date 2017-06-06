@@ -1,0 +1,2 @@
+includes: ['layer:basic', 'interface:gluster-peer']
+repo: https://git.openstack.org/openstack/charm-glusterfs

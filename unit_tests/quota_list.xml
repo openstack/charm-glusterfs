@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<cliOutput>
+  <opRet>0</opRet>
+  <opErrno>0</opErrno>
+  <opErrstr/>
+  <volQuota>
+    <limit>
+      <path>/</path>
+      <hard_limit>10240</hard_limit>
+      <soft_limit_percent>80%</soft_limit_percent>
+      <soft_limit_value>8192</soft_limit_value>
+      <used_space>0</used_space>
+      <avail_space>10240</avail_space>
+      <sl_exceeded>No</sl_exceeded>
+      <hl_exceeded>No</hl_exceeded>
+    </limit>
+    <limit>
+      <path>/test2</path>
+      <hard_limit>10240</hard_limit>
+      <soft_limit_percent>80%</soft_limit_percent>
+      <soft_limit_value>8192</soft_limit_value>
+      <used_space>0</used_space>
+      <avail_space>10240</avail_space>
+      <sl_exceeded>No</sl_exceeded>
+      <hl_exceeded>No</hl_exceeded>
+    </limit>
+  </volQuota>
+</cliOutput>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<cliOutput>
+    <opRet>0</opRet>
+    <opErrno>0</opErrno>
+    <opErrstr/>
+    <volInfo>
+        <volumes>
+            <volume>
+                <name>chris</name>
+                <id>f96dcd18-3235-4dcc-85cf-77c5cdec0951</id>
+                <status>1</status>
+                <statusStr>Started</statusStr>
+                <snapshotCount>0</snapshotCount>
+                <brickCount>12</brickCount>
+                <distCount>3</distCount>
+                <stripeCount>1</stripeCount>
+                <replicaCount>3</replicaCount>
+                <arbiterCount>0</arbiterCount>
+                <disperseCount>0</disperseCount>
+                <redundancyCount>0</redundancyCount>
+                <type>7</type>
+                <typeStr>Distributed-Replicate</typeStr>
+                <transport>0</transport>
+                <xlators/>
+                <bricks>
+                    <brick uuid="663bbc5b-c9b4-4a02-8b56-85e05e1b01c8">
+                        172.31.12.7:/mnt/xvdb
+                        <name>172.31.12.7:/mnt/xvdb</name>
+                        <hostUuid>663bbc5b-c9b4-4a02-8b56-85e05e1b01c8
+                        </hostUuid>
+                        <isArbiter>0</isArbiter>
+                    </brick>
+                    <brick uuid="15af92ad-ae64-4aba-89db-73730f2ca6ec">
+                        172.31.21.242:/mnt/xvdb
+                        <name>172.31.21.242:/mnt/xvdb</name>
+                        <hostUuid>15af92ad-ae64-4aba-89db-73730f2ca6ec
+                        </hostUuid>
+                        <isArbiter>0</isArbiter>
+                    </brick>
+                    <brick uuid="cebf02bb-a304-4058-986e-375e2e1e5313">
+                        172.31.39.30:/mnt/xvdb
+                        <name>172.31.39.30:/mnt/xvdb</name>
+                        <hostUuid>cebf02bb-a304-4058-986e-375e2e1e5313
+                        </hostUuid>
+                        <isArbiter>0</isArbiter>
+                    </brick>
+                    <brick uuid="663bbc5b-c9b4-4a02-8b56-85e05e1b01c8">
+                        172.31.12.7:/mnt/xvdh
+                        <name>172.31.12.7:/mnt/xvdh</name>
+                        <hostUuid>663bbc5b-c9b4-4a02-8b56-85e05e1b01c8
+                        </hostUuid>
+                        <isArbiter>0</isArbiter>
+                    </brick>
+                    <brick uuid="15af92ad-ae64-4aba-89db-73730f2ca6ec">
+                        172.31.21.242:/mnt/xvdh
+                        <name>172.31.21.242:/mnt/xvdh</name>
+                        <hostUuid>15af92ad-ae64-4aba-89db-73730f2ca6ec
+                        </hostUuid>
+                        <isArbiter>0</isArbiter>
+                    </brick>
+                    <brick uuid="cebf02bb-a304-4058-986e-375e2e1e5313">
+                        172.31.39.30:/mnt/xvdh
+                        <name>172.31.39.30:/mnt/xvdh</name>
+                        <hostUuid>cebf02bb-a304-4058-986e-375e2e1e5313
+                        </hostUuid>
+                        <isArbiter>0</isArbiter>
+                    </brick>
+                    <brick uuid="663bbc5b-c9b4-4a02-8b56-85e05e1b01c8">
+                        172.31.12.7:/mnt/xvdg
+                        <name>172.31.12.7:/mnt/xvdg</name>
+                        <hostUuid>663bbc5b-c9b4-4a02-8b56-85e05e1b01c8
+                        </hostUuid>
+                        <isArbiter>0</isArbiter>
+                    </brick>
+                    <brick uuid="15af92ad-ae64-4aba-89db-73730f2ca6ec">
+                        172.31.21.242:/mnt/xvdg
+                        <name>172.31.21.242:/mnt/xvdg</name>
+                        <hostUuid>15af92ad-ae64-4aba-89db-73730f2ca6ec
+                        </hostUuid>
+                        <isArbiter>0</isArbiter>
+                    </brick>
+                    <brick uuid="cebf02bb-a304-4058-986e-375e2e1e5313">
+                        172.31.39.30:/mnt/xvdg
+                        <name>172.31.39.30:/mnt/xvdg</name>
+                        <hostUuid>cebf02bb-a304-4058-986e-375e2e1e5313
+                        </hostUuid>
+                        <isArbiter>0</isArbiter>
+                    </brick>
+                    <brick uuid="663bbc5b-c9b4-4a02-8b56-85e05e1b01c8">
+                        172.31.12.7:/mnt/xvdf
+                        <name>172.31.12.7:/mnt/xvdf</name>
+                        <hostUuid>663bbc5b-c9b4-4a02-8b56-85e05e1b01c8
+                        </hostUuid>
+                        <isArbiter>0</isArbiter>
+                    </brick>
+                    <brick uuid="15af92ad-ae64-4aba-89db-73730f2ca6ec">
+                        172.31.21.242:/mnt/xvdf
+                        <name>172.31.21.242:/mnt/xvdf</name>
+                        <hostUuid>15af92ad-ae64-4aba-89db-73730f2ca6ec
+                        </hostUuid>
+                        <isArbiter>0</isArbiter>
+                    </brick>
+                    <brick uuid="cebf02bb-a304-4058-986e-375e2e1e5313">
+                        172.31.39.30:/mnt/xvdf
+                        <name>172.31.39.30:/mnt/xvdf</name>
+                        <hostUuid>cebf02bb-a304-4058-986e-375e2e1e5313
+                        </hostUuid>
+                        <isArbiter>0</isArbiter>
+                    </brick>
+                </bricks>
+                <optCount>11</optCount>
+                <options>
+                    <option>
+                        <name>cluster.favorite-child-policy</name>
+                        <value>size</value>
+                    </option>
+                    <option>
+                        <name>performance.rda-cache-limit</name>
+                        <value>20971520</value>
+                    </option>
+                    <option>
+                        <name>performance.readdir-ahead</name>
+                        <value>On</value>
+                    </option>
+                    <option>
+                        <name>performance.parallel-readdir</name>
+                        <value>On</value>
+                    </option>
+                    <option>
+                        <name>diagnostics.stats-dnscache-ttl-sec</name>
+                        <value>3600</value>
+                    </option>
+                    <option>
+                        <name>diagnostics.stats-dump-interval</name>
+                        <value>30</value>
+                    </option>
+                    <option>
+                        <name>diagnostics.fop-sample-interval</name>
+                        <value>5</value>
+                    </option>
+                    <option>
+                        <name>diagnostics.count-fop-hits</name>
+                        <value>On</value>
+                    </option>
+                    <option>
+                        <name>diagnostics.latency-measurement</name>
+                        <value>On</value>
+                    </option>
+                    <option>
+                        <name>transport.address-family</name>
+                        <value>inet</value>
+                    </option>
+                    <option>
+                        <name>nfs.disable</name>
+                        <value>Off</value>
+                    </option>
+                </options>
+            </volume>
+            <count>1</count>
+        </volumes>
+    </volInfo>
+</cliOutput>
