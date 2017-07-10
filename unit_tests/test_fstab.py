@@ -15,14 +15,9 @@
 import os
 import unittest
 
-from lib.gluster.fstab import FsEntry, FsTab
+from lib.charm.gluster.fstab import FsEntry, FsTab
 from mock import patch
 from result import Ok
-
-
-# mock_apt = mock.MagicMock()
-# sys.modules['apt'] = mock_apt
-# mock_apt.apt_pkg = mock.MagicMock()
 
 
 class Test(unittest.TestCase):

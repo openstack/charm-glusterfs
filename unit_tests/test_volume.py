@@ -17,7 +17,7 @@ import uuid
 from ipaddress import ip_address
 
 import mock
-from lib.gluster import peer, volume
+from lib.charm.gluster import peer, volume
 
 # mock_apt = mock.MagicMock()
 # sys.modules['apt'] = mock_apt
@@ -58,8 +58,8 @@ class Test(unittest.TestCase):
     def testOkToRemove(self):
         pass
 
-    @mock.patch("lib.gluster.volume.unit_get")
-    @mock.patch("lib.gluster.volume.get_host_ip")
+    @mock.patch("lib.charm.gluster.volume.unit_get")
+    @mock.patch("lib.charm.gluster.volume.get_host_ip")
     def testGetLocalIp(self, _get_host_ip, _unit_get):
         _unit_get.return_value = "192.168.1.6"
         _get_host_ip.return_value = "192.168.1.6"
@@ -87,7 +87,7 @@ class Test(unittest.TestCase):
     def testVolumeAddBrick(self):
         pass
 
-    @mock.patch('lib.gluster.volume.volume.create')
+    @mock.patch('lib.charm.gluster.volume.volume.create')
     def testVolumeCreateArbiter(self, _volume_create):
         volume.volume_create_arbiter(vol="test", replica_count=3,
                                      arbiter_count=1,
@@ -97,7 +97,7 @@ class Test(unittest.TestCase):
             volname='test', replica=3, arbiter=1, transport='tcp',
             volbricks=[str(b) for b in brick_list], force=False)
 
-    @mock.patch('lib.gluster.volume.volume.create')
+    @mock.patch('lib.charm.gluster.volume.volume.create')
     def testVolumeCreateDistributed(self, _volume_create):
         volume.volume_create_distributed(vol="test",
                                          transport=volume.Transport.Tcp,
@@ -106,7 +106,7 @@ class Test(unittest.TestCase):
                                           volbricks=[str(b) for b in
                                                      brick_list], force=False)
 
-    @mock.patch('lib.gluster.volume.volume.create')
+    @mock.patch('lib.charm.gluster.volume.volume.create')
     def testVolumeCreateErasure(self, _volume_create):
         volume.volume_create_erasure(vol="test", disperse_count=1,
                                      redundancy_count=3,
@@ -116,7 +116,7 @@ class Test(unittest.TestCase):
             volname='test', disperse=1, redundancy=3, transport='tcp',
             volbricks=[str(b) for b in brick_list], force=False)
 
-    @mock.patch('lib.gluster.volume.volume.create')
+    @mock.patch('lib.charm.gluster.volume.volume.create')
     def testVolumeCreateReplicated(self, _volume_create):
         volume.volume_create_replicated(vol="test", replica_count=3,
                                         transport=volume.Transport.Tcp,
@@ -125,7 +125,7 @@ class Test(unittest.TestCase):
             volname='test', replica=3, transport='tcp',
             volbricks=[str(b) for b in brick_list], force=False)
 
-    @mock.patch('lib.gluster.volume.volume.create')
+    @mock.patch('lib.charm.gluster.volume.volume.create')
     def testVolumeCreateStriped(self, _volume_create):
         volume.volume_create_striped(vol="test", stripe_count=3,
                                      transport=volume.Transport.Tcp,
@@ -135,7 +135,7 @@ class Test(unittest.TestCase):
             volname='test', stripe=3, transport='tcp',
             volbricks=[str(b) for b in brick_list], force=False)
 
-    @mock.patch('lib.gluster.volume.volume.create')
+    @mock.patch('lib.charm.gluster.volume.volume.create')
     def testVolumeCreateStripedReplicated(self, _volume_create):
         volume.volume_create_striped_replicated(vol="test", stripe_count=1,
                                                 replica_count=3,

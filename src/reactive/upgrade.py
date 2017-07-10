@@ -20,14 +20,13 @@ from typing import Optional
 
 import apt
 import apt_pkg
+from charm.gluster import peer, volume
+from charm.gluster.apt import get_candidate_package_version
 from charmhelpers.cli import hookenv
 from charmhelpers.core.hookenv import config, log, status_set, ERROR
 from charmhelpers.core.host import service_start, service_stop
 from charmhelpers.fetch import apt_install, add_source, apt_update
 from gluster.cli.parsers import GlusterCmdOutputParseError
-from lib.gluster.apt import get_candidate_package_version
-from lib.gluster.peer import Peer
-from lib.gluster.volume import volume_info
 from result import Err, Ok, Result
 
 
@@ -83,7 +82,7 @@ def roll_cluster(new_version: str) -> Result:
 
     # volume_name always has a default
     try:
-        volume_bricks = volume_info(volume_name)
+        volume_bricks = volume.volume_info(volume_name)
         peer_list = volume_bricks.value.bricks.peers
 
         log("peer_list: {}".format(peer_list))
@@ -211,10 +210,10 @@ def gluster_key_exists(key: str) -> bool:
     return os.path.exists(location)
 
 
-def wait_on_previous_node(previous_node: Peer, version: str) -> Result:
+def wait_on_previous_node(previous_node: peer.Peer, version: str) -> Result:
     """
     Wait on a previous node to finish upgrading
-    :param previous_node: Peer to wait on
+    :param previous_node: peer.Peer to wait on
     :param version: str.  Version we're upgrading to
     :return: Result with Ok or Err
     """

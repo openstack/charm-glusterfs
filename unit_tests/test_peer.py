@@ -17,12 +17,12 @@ import uuid
 from ipaddress import ip_address
 
 import mock
-from lib.gluster import peer
-from lib.gluster.peer import Peer, State
+from lib.charm.gluster import peer
+from lib.charm.gluster.peer import Peer, State
 
 
 class Test(unittest.TestCase):
-    @mock.patch('lib.gluster.peer.peer_list')
+    @mock.patch('lib.charm.gluster.peer.peer_list')
     def testGetPeer(self, _peer_list):
         existing_peers = [
             peer.Peer(
@@ -38,7 +38,7 @@ class Test(unittest.TestCase):
         result = peer.get_peer(hostname=ip_address('172.31.21.242'))
         self.assertIs(result, existing_peers[1])
 
-    @mock.patch('lib.gluster.peer.gpeer.pool')
+    @mock.patch('lib.charm.gluster.peer.gpeer.pool')
     def testPeerList(self, _peer_pool):
         # Ignore parse_peer_list.  We test that above
         peer.peer_list()
@@ -46,8 +46,8 @@ class Test(unittest.TestCase):
         #                                arg_list=["pool", "list", "--xml"],
         #                                script_mode=False)
 
-    @mock.patch('lib.gluster.peer.peer_list')
-    @mock.patch('lib.gluster.peer.gpeer.probe')
+    @mock.patch('lib.charm.gluster.peer.peer_list')
+    @mock.patch('lib.charm.gluster.peer.gpeer.probe')
     def testPeerProbe(self, _peer_probe, _peer_list):
         _peer_list.return_value = [
             Peer(hostname="172.31.18.192",

@@ -13,7 +13,7 @@
 # limitations under the License.
 from charmhelpers.core.hookenv import ERROR, log, relation_set, unit_public_ip
 
-from lib.gluster.volume import volume_list
+from charm.gluster.volume import volume_list
 
 
 def fuse_relation_joined():

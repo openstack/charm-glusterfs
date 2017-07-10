@@ -334,208 +334,208 @@ class GlusterOption(object):
 
     @staticmethod
     def from_str(s: str, value):
-        if s == "auth.allow":
+        if s == "auth-allow":
             return GlusterOption(option=GlusterOption.AuthAllow, value=value)
-        elif s == "auth.reject":
+        elif s == "auth-reject":
             return GlusterOption(option=GlusterOption.AuthReject, value=value)
-        elif s == "auth.ssl-allow":
+        elif s == "auth-ssl-allow":
             return GlusterOption(option=GlusterOption.SslAllow, value=value)
-        elif s == "client.ssl":
+        elif s == "client-ssl":
             t = Toggle.from_str(value)
             return GlusterOption(option=GlusterOption.ClientSsl, value=t)
-        elif s == "cluster.favorite-child-policy":
+        elif s == "cluster-favorite-child-policy":
             policy = SplitBrainPolicy.from_str(value)
             return GlusterOption(option=GlusterOption.FavoriteChildPolicy,
                                  value=policy)
-        elif s == "client.grace-timeout":
+        elif s == "client-grace-timeout":
             i = int(value)
             return GlusterOption(option=GlusterOption.ClientGraceTimeout,
                                  value=i)
-        elif s == "cluster.self-heal-window-size":
+        elif s == "cluster-self-heal-window-size":
             i = int(value)
             return GlusterOption(
                 option=GlusterOption.ClusterSelfHealWindowSize,
                 value=i)
-        elif s == "cluster.data-self-heal-algorithm":
+        elif s == "cluster-data-self-heal-algorithm":
             s = SelfHealAlgorithm.from_str(value)
             return GlusterOption(
                 option=GlusterOption.ClusterDataSelfHealAlgorithm, value=s)
-        elif s == "cluster.min-free-disk":
+        elif s == "cluster-min-free-disk":
             i = int(value)
             return GlusterOption(option=GlusterOption.ClusterMinFreeDisk,
                                  value=i)
-        elif s == "cluster.stripe-block-size":
+        elif s == "cluster-stripe-block-size":
             i = int(value)
             return GlusterOption(option=GlusterOption.ClusterStripeBlockSize,
                                  value=i)
-        elif s == "cluster.self-heal-daemon":
+        elif s == "cluster-self-heal-daemon":
             t = Toggle.from_str(value)
             return GlusterOption(option=GlusterOption.ClusterSelfHealDaemon,
                                  value=t)
-        elif s == "cluster.ensure-durability":
+        elif s == "cluster-ensure-durability":
             t = Toggle.from_str(value)
             return GlusterOption(option=GlusterOption.ClusterEnsureDurability,
                                  value=t)
-        elif s == "diagnostics.brick-log-level":
+        elif s == "diagnostics-brick-log-level":
             return GlusterOption(option=GlusterOption.DiagnosticsBrickLogLevel,
                                  value=value)
-        elif s == "diagnostics.client-log-level":
+        elif s == "diagnostics-client-log-level":
             return GlusterOption(
                 option=GlusterOption.DiagnosticsClientLogLevel,
                 value=value)
-        elif s == "diagnostics.latency-measurement":
+        elif s == "diagnostics-latency-measurement":
             t = Toggle.from_str(value)
             return GlusterOption(
                 option=GlusterOption.DiagnosticsLatencyMeasurement, value=t)
-        elif s == "diagnostics.count-fop-hits":
+        elif s == "diagnostics-count-fop-hits":
             t = Toggle.from_str(value)
             return GlusterOption(option=GlusterOption.DiagnosticsCountFopHits,
                                  value=t)
-        elif s == "diagnostics.stats-dump-interval":
+        elif s == "diagnostics-stats-dump-interval":
             i = int(value)
             return GlusterOption(
                 option=GlusterOption.DiagnosticsStatsDumpInterval, value=i)
-        elif s == "diagnostics.fop-sample-buf-size":
+        elif s == "diagnostics-fop-sample-buf-size":
             i = int(value)
             return GlusterOption(
                 option=GlusterOption.DiagnosticsFopSampleBufSize,
                 value=i)
-        elif s == "diagnostics.fop-sample-interval":
+        elif s == "diagnostics-fop-sample-interval":
             i = int(value)
             return GlusterOption(
                 option=GlusterOption.DiagnosticsFopSampleInterval, value=i)
-        elif s == "diagnostics.stats-dnscache-ttl-sec":
+        elif s == "diagnostics-stats-dnscache-ttl-sec":
             i = int(value)
             return GlusterOption(
                 option=GlusterOption.DiagnosticsStatsDnscacheTtlSec, value=i)
-        elif s == "diagnostics.dump-fd-stats":
+        elif s == "diagnostics-dump-fd-stats":
             t = Toggle.from_str(value)
             return GlusterOption(option=GlusterOption.DiagnosticsDumpFdStats,
                                  value=t)
-        elif s == "features.read-only":
+        elif s == "features-read-only":
             t = Toggle.from_str(value)
             return GlusterOption(
                 option=GlusterOption.FeaturesReadOnly, value=t)
-        elif s == "features.lock-heal":
+        elif s == "features-lock-heal":
             t = Toggle.from_str(value)
             return GlusterOption(
                 option=GlusterOption.FeaturesLockHeal, value=t)
-        elif s == "features.quota-timeout":
+        elif s == "features-quota-timeout":
             i = int(value)
             return GlusterOption(option=GlusterOption.FeaturesQuotaTimeout,
                                  value=i)
-        elif s == "geo-replication.indexing":
+        elif s == "geo-replication-indexing":
             t = Toggle.from_str(value)
             return GlusterOption(option=GlusterOption.GeoReplicationIndexing,
                                  value=t)
-        elif s == "network.frame-timeout":
+        elif s == "network-frame-timeout":
             i = int(value)
             return GlusterOption(option=GlusterOption.NetworkFrameTimeout,
                                  value=i)
-        elif s == "nfs.enable-ino32":
+        elif s == "nfs-enable-ino32":
             t = Toggle.from_str(value)
             return GlusterOption(option=GlusterOption.NfsEnableIno32, value=t)
-        elif s == "nfs.volume-access":
+        elif s == "nfs-volume-access":
             s = AccessMode.from_str(value)
             return GlusterOption(option=GlusterOption.NfsVolumeAccess, value=s)
-        elif s == "nfs.trusted-write":
+        elif s == "nfs-trusted-write":
             t = Toggle.from_str(value)
             return GlusterOption(option=GlusterOption.NfsTrustedWrite, value=t)
-        elif s == "nfs.trusted-sync":
+        elif s == "nfs-trusted-sync":
             t = Toggle.from_str(value)
             return GlusterOption(option=GlusterOption.NfsTrustedSync, value=t)
-        elif s == "nfs.export-dir":
+        elif s == "nfs-export-dir":
             return GlusterOption(
                 option=GlusterOption.NfsExportDir, value=value)
-        elif s == "nfs.export-volumes":
+        elif s == "nfs-export-volumes":
             t = Toggle.from_str(value)
             return GlusterOption(
                 option=GlusterOption.NfsExportVolumes, value=t)
-        elif s == "nfs.rpc-auth-unix":
+        elif s == "nfs-rpc-auth-unix":
             t = Toggle.from_str(value)
             return GlusterOption(option=GlusterOption.NfsRpcAuthUnix, value=t)
-        elif s == "nfs.rpc-auth-null":
+        elif s == "nfs-rpc-auth-null":
             t = Toggle.from_str(value)
             return GlusterOption(option=GlusterOption.NfsRpcAuthNull, value=t)
-        elif s == "nfs.ports-insecure":
+        elif s == "nfs-ports-insecure":
             t = Toggle.from_str(value)
             return GlusterOption(
                 option=GlusterOption.NfsPortsInsecure, value=t)
-        elif s == "nfs.addr-namelookup":
+        elif s == "nfs-addr-namelookup":
             t = Toggle.from_str(value)
             return GlusterOption(option=GlusterOption.NfsAddrNamelookup,
                                  value=t)
-        elif s == "nfs.register-with-portmap":
+        elif s == "nfs-register-with-portmap":
             t = Toggle.from_str(value)
             return GlusterOption(option=GlusterOption.NfsRegisterWithPortmap,
                                  value=t)
-        elif s == "nfs.disable":
+        elif s == "nfs-disable":
             t = Toggle.from_str(value)
             return GlusterOption(option=GlusterOption.NfsDisable, value=t)
-        elif s == "performance.write-behind-window-size":
+        elif s == "performance-write-behind-window-size":
             i = int(value)
             return GlusterOption(
                 option=GlusterOption.PerformanceWriteBehindWindowSize, value=i)
-        elif s == "performance.io-thread-count":
+        elif s == "performance-io-thread-count":
             i = int(value)
             return GlusterOption(option=GlusterOption.PerformanceIoThreadCount,
                                  value=i)
-        elif s == "performance.flush-behind":
+        elif s == "performance-flush-behind":
             t = Toggle.from_str(value)
             return GlusterOption(option=GlusterOption.PerformanceFlushBehind,
                                  value=t)
-        elif s == "performance.cache-max-file-size":
+        elif s == "performance-cache-max-file-size":
             i = int(value)
             return GlusterOption(
                 option=GlusterOption.PerformanceCacheMaxFileSize,
                 value=i)
-        elif s == "performance.cache-min-file-size":
+        elif s == "performance-cache-min-file-size":
             i = int(value)
             return GlusterOption(
                 option=GlusterOption.PerformanceCacheMinFileSize,
                 value=i)
-        elif s == "performance.cache-refresh-timeout":
+        elif s == "performance-cache-refresh-timeout":
             i = int(value)
             return GlusterOption(
                 option=GlusterOption.PerformanceCacheRefreshTimeout, value=i)
-        elif s == "performance.cache-size":
+        elif s == "performance-cache-size":
             i = int(value)
             return GlusterOption(option=GlusterOption.PerformanceCacheSize,
                                  value=i)
-        elif s == "performance.readdir-ahead":
+        elif s == "performance-readdir-ahead":
             t = Toggle.from_str(value)
             return GlusterOption(option=GlusterOption.PerformanceReadDirAhead,
                                  value=t)
-        elif s == "performance.parallel-readdir":
+        elif s == "performance-parallel-readdir":
             t = Toggle.from_str(value)
             return GlusterOption(option=GlusterOption.PerformanceReadDirAhead,
                                  value=t)
-        elif s == "performance.readdir-cache-limit":
+        elif s == "performance-readdir-cache-limit":
             i = int(value)
             return GlusterOption(
                 option=GlusterOption.PerformanceReadDirAheadCacheLimit,
                 value=i)
-        elif s == "server.ssl":
+        elif s == "server-ssl":
             t = Toggle.from_str(value)
             return GlusterOption(option=GlusterOption.ServerSsl, value=t)
-        elif s == "server.allow-insecure":
+        elif s == "server-allow-insecure":
             t = Toggle.from_str(value)
             return GlusterOption(option=GlusterOption.ServerAllowInsecure,
                                  value=t)
-        elif s == "server.grace-timeout":
+        elif s == "server-grace-timeout":
             i = int(value)
             return GlusterOption(option=GlusterOption.ServerGraceTimeout,
                                  value=i)
-        elif s == "server.statedump-path":
+        elif s == "server-statedump-path":
             return GlusterOption(option=GlusterOption.ServerStatedumpPath,
                                  value=value)
-        elif s == "ssl.certificate-depth":
+        elif s == "ssl-certificate-depth":
             i = int(value)
             return GlusterOption(option=GlusterOption.SslCertificateDepth,
                                  value=i)
-        elif s == "ssl.cipher-list":
+        elif s == "ssl-cipher-list":
             return GlusterOption(GlusterOption.SslCipherList, value=value)
-        elif s == "storage.health-check-interval":
+        elif s == "storage-health-check-interval":
             i = int(value)
             return GlusterOption(
                 option=GlusterOption.StorageHealthCheckInterval,
@@ -972,6 +972,7 @@ def volume_info(vol_name: str) -> List[Volume]:
         if len(info) > 0:
             v = info[0]
             brick_list = []
+            option_dict = {}
             for brick in v['bricks']:
                 ip_addr = brick['name'].split(':')[0]
                 path = brick['name'].split(':')[1]
@@ -984,6 +985,8 @@ def volume_info(vol_name: str) -> List[Volume]:
                         path=path,
                         # Not enough info to answer this next field
                         is_arbiter=False))
+            for key_value in v['options']:
+                option_dict[key_value['name']] = key_value['value']
             return [Volume(
                 name=v['name'],
                 vol_id=uuid.UUID(v['uuid']),
@@ -998,7 +1001,7 @@ def volume_info(vol_name: str) -> List[Volume]:
                 redundancy_count=None,
                 transport=Transport.from_str(v['transport']),
                 bricks=brick_list,
-                options=v['options'],
+                options=option_dict,
             )]
         else:
             return []
@@ -1045,7 +1048,7 @@ def volume_enable_bitrot(vol_name: str) -> None:
     """
     Enable bitrot detection and remediation on the volume
     volume: String.  The volume to operate on.
-    :return: 0 on success
+    :return: None on success
     :raises: GlusterError if the command fails to run
     """
     try:
@@ -1072,20 +1075,25 @@ def volume_set_bitrot_option(vol_name: str, setting: BitrotOption) -> None:
     Set a bitrot option on the vol_name
     vol_name: String.  The vol_name to operate on.
     setting: BitrotOption.  The option to set on the bitrot daemon
-    :return: 0 on success
+    :return: None on success
     :raises: GlusterError if the command fails to run
     """
     try:
-        if setting == BitrotOption.ScrubThrottle:
-            bitrot.scrub_throttle(volname=vol_name, throttle_type=str(setting))
-        elif setting == BitrotOption.ScrubFrequency:
-            bitrot.scrub_frequency(volname=vol_name, freq=str(setting))
-        elif setting == BitrotOption.Scrub.Pause:
-            bitrot.scrub_pause(volname=vol_name)
-        elif setting == BitrotOption.Scrub.Resume:
-            bitrot.scrub_resume(volname=vol_name)
-        elif setting == BitrotOption.Scrub.Status:
-            bitrot.scrub_status(volname=vol_name)
+        log("Setting bitrot option {}={} on volume: {}".format(setting,
+                                                               setting.value,
+                                                               vol_name))
+        if type(setting) is BitrotOption.ScrubThrottle:
+            bitrot.scrub_throttle(volname=vol_name,
+                                  throttle_type=str(setting.value))
+        elif type(setting) is BitrotOption.ScrubFrequency:
+            bitrot.scrub_frequency(volname=vol_name, freq=str(setting.value))
+        elif type(setting) is BitrotOption.Scrub:
+            if setting == BitrotOption.Scrub.Pause:
+                bitrot.scrub_pause(volname=vol_name)
+            elif setting == BitrotOption.Scrub.Resume:
+                bitrot.scrub_resume(volname=vol_name)
+            elif setting == BitrotOption.Scrub.Status:
+                bitrot.scrub_status(volname=vol_name)
     except GlusterCmdException:
         raise
 
@@ -1111,10 +1119,11 @@ def volume_quotas_enabled(vol_name: str) -> Result:
     vol_info = volume_info(vol_name)
     for vol in vol_info:
         if vol.name == vol_name:
-            quota = vol.options["features.quota"]
-            if quota is None or quota == "false":
+            if "features.quota" not in vol.options:
                 return Ok(False)
-            elif quota == "on":
+            elif vol.options['features.quota'] == "off":
+                return Ok(False)
+            elif vol.options['features.quota'] == "on":
                 return Ok(True)
             else:
                 # No idea what this is
@@ -1297,13 +1306,8 @@ def volume_delete(vol_name: str) -> None:
 
 def volume_rebalance(vol_name: str) -> None:
     """
-    # This function doesn't do anything yet.  It is a place holder because
-    # volume_rebalance is a long running command and I haven't decided how to
-    # poll for completion yet
-    # Usage: volume rebalance <VOLNAME> fix-layout start | start
-    # [force]|stop|status
     :param vol_name: str.  The name of the volume to start rebalancing
-    :return: Result.  Ok or Err
+    :return: None.
     """
     try:
         rebalance.start(vol_name)
@@ -1320,7 +1324,7 @@ def vol_set(vol_name: str, options: Dict[str, str]) -> None:
     try:
         volume.optset(volname=vol_name, opts=options)
     except GlusterCmdException as e:
-        log("volume.optsetfailed: {}".format(e), ERROR)
+        log("volume.optset failed: {}".format(e), ERROR)
         raise
 
 
@@ -1337,6 +1341,7 @@ def volume_set_options(volume: str, settings: List[GlusterOption]) -> Result:
     for setting in settings:
         options[setting.option] = str(setting.value)
     try:
+        log("vol_set: {} with options: {}".format(volume, options))
         vol_set(volume, options)
     except GlusterCmdException as e:
         error_list.append(e)

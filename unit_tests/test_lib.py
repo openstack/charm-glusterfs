@@ -16,13 +16,13 @@ import unittest
 import uuid
 
 import mock
-from lib.gluster import lib
-from lib.gluster.peer import Peer, State
-from lib.gluster.volume import Brick, Volume, VolumeType, Transport
+from lib.charm.gluster import lib
+from lib.charm.gluster.peer import Peer, State
+from lib.charm.gluster.volume import Brick, Volume, VolumeType, Transport
 
 
 class Test(unittest.TestCase):
-    @mock.patch('lib.gluster.lib.log')
+    @mock.patch('lib.charm.gluster.lib.log')
     def testPeersAreNotReady(self, _log):
         peer_list = [
             Peer(uuid=uuid.UUID('3da2c343-7c67-499d-a6bb-68591cc72bc1'),
@@ -37,7 +37,7 @@ class Test(unittest.TestCase):
         result = lib.peers_are_ready(peer_list)
         self.assertFalse(result)
 
-    @mock.patch('lib.gluster.lib.log')
+    @mock.patch('lib.charm.gluster.lib.log')
     def testPeersAreReady(self, _log):
         peer_list = [
             Peer(uuid=uuid.UUID('3da2c343-7c67-499d-a6bb-68591cc72bc1'),

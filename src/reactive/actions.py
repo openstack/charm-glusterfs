@@ -16,16 +16,12 @@
 import os
 import sys
 
+sys.path.append('lib')
+
 from charmhelpers.core import hookenv
 from charmhelpers.core.hookenv import action_get, action_fail, action_set
-from lib.gluster.volume import (quota_list,
-                                BitrotOption, ScrubAggression, ScrubSchedule,
-                                ScrubControl, GlusterOption,
-                                volume_add_quota,
-                                volume_disable_bitrot, volume_enable_bitrot,
-                                volume_enable_quotas, volume_quotas_enabled,
-                                volume_rebalance, volume_remove_quota,
-                                volume_set_bitrot_option, volume_set_options)
+from gluster.cli import GlusterCmdException
+from charm.gluster import volume
 
 
 def rebalance_volume():
@@ -35,10 +31,10 @@ def rebalance_volume():
     vol = action_get("volume")
     if not vol:
         action_fail("volume not specified")
-    output = volume_rebalance(vol)
-    if output.is_err():
-        action_fail(
-            "volume rebalance failed with error: {}".format(output.value))
+    try:
+        volume.volume_rebalance(vol)
+    except GlusterCmdException as e:
+        action_fail("volume rebalance failed with error: {}".format(e))
 
 
 def enable_bitrot_scan():
@@ -48,9 +44,10 @@ def enable_bitrot_scan():
     vol = action_get("volume")
     if not vol:
         action_fail("volume not specified")
-    output = volume_enable_bitrot(vol)
-    if output.is_err():
-        action_fail("enable bitrot failed with error: {}".format(output.value))
+    try:
+        volume.volume_enable_bitrot(vol)
+    except GlusterCmdException as e:
+        action_fail("enable bitrot failed with error: {}".format(e))
 
 
 def disable_bitrot_scan():
@@ -60,10 +57,10 @@ def disable_bitrot_scan():
     vol = action_get("volume")
     if not vol:
         action_fail("volume not specified")
-    output = volume_disable_bitrot(vol)
-    if output.is_err():
-        action_fail("enable disable failed with error: {}".format(
-            output.value))
+    try:
+        volume.volume_disable_bitrot(vol)
+    except GlusterCmdException as e:
+        action_fail("enable disable failed with error: {}".format(e))
 
 
 def pause_bitrot_scan():
@@ -71,11 +68,11 @@ def pause_bitrot_scan():
     Pause bitrot scan
     """
     vol = action_get("volume")
-    option = BitrotOption.Scrub(ScrubControl.Pause)
-    output = volume_set_bitrot_option(vol, option)
-    if output.is_err():
-        action_fail(
-            "pause bitrot scan failed with error: {}".format(output.value))
+    option = volume.BitrotOption.Scrub(volume.ScrubControl.Pause)
+    try:
+        volume.volume_set_bitrot_option(vol, option)
+    except GlusterCmdException as e:
+        action_fail("pause bitrot scan failed with error: {}".format(e))
 
 
 def resume_bitrot_scan():
@@ -83,11 +80,11 @@ def resume_bitrot_scan():
     Resume bitrot scan
     """
     vol = action_get("volume")
-    option = BitrotOption.Scrub(ScrubControl.Resume)
-    output = volume_set_bitrot_option(vol, option)
-    if output.is_err():
-        action_fail(
-            "resume bitrot scan failed with error: {}".format(option.value))
+    option = volume.BitrotOption.Scrub(volume.ScrubControl.Resume)
+    try:
+        volume.volume_set_bitrot_option(vol, option)
+    except GlusterCmdException as e:
+        action_fail("resume bitrot scan failed with error: {}".format(e))
 
 
 def set_bitrot_scan_frequency():
@@ -96,11 +93,14 @@ def set_bitrot_scan_frequency():
     """
     vol = action_get("volume")
     frequency = action_get("frequency")
-    option = ScrubSchedule.from_str(frequency)
-    output = volume_set_bitrot_option(vol, BitrotOption.ScrubFrequency(option))
-    if output.is_err():
+    option = volume.ScrubSchedule.from_str(frequency)
+    try:
+        volume.volume_set_bitrot_option(vol,
+                                        volume.BitrotOption.ScrubFrequency(
+                                            option))
+    except GlusterCmdException as e:
         action_fail("set bitrot scan frequency failed with error: {}".format(
-            output.value))
+            e))
 
 
 def set_bitrot_throttle():
@@ -109,11 +109,13 @@ def set_bitrot_throttle():
     """
     vol = action_get("volume")
     throttle = action_get("throttle")
-    option = ScrubAggression.from_str(throttle)
-    output = volume_set_bitrot_option(vol, BitrotOption.ScrubThrottle(option))
-    if output.is_err():
+    option = volume.ScrubAggression.from_str(throttle)
+    try:
+        volume.volume_set_bitrot_option(vol, volume.BitrotOption.ScrubThrottle(
+            option))
+    except GlusterCmdException as e:
         action_fail(
-            "set bitrot throttle failed with error: {}".format(output.value))
+            "set bitrot throttle failed with error: {}".format(e))
 
 
 def enable_volume_quota():
@@ -121,52 +123,52 @@ def enable_volume_quota():
     Enable quotas on the volume
     """
     # Gather our action parameters
-    volume = action_get("volume")
+    vol = action_get("volume")
     usage_limit = action_get("usage-limit")
     parsed_usage_limit = int(usage_limit)
     path = action_get("path")
     # Turn quotas on if not already enabled
-    quotas_enabled = volume_quotas_enabled(volume)
+    quotas_enabled = volume.volume_quotas_enabled(vol)
     if quotas_enabled.is_err():
         action_fail("Enable quota failed: {}".format(quotas_enabled.value))
     if not quotas_enabled.value:
-        output = volume_enable_quotas(volume)
-        if output.is_err():
-            action_fail("Enable quotas failed: {}".format(output.value))
+        try:
+            volume.volume_enable_quotas(vol)
+        except GlusterCmdException as e:
+            action_fail("Enable quotas failed: {}".format(e))
 
-    output = volume_add_quota(volume, path, parsed_usage_limit)
-    if output.is_err():
-        action_fail("Add quota failed: {}".format(output.value))
+    try:
+        volume.volume_add_quota(vol, path, parsed_usage_limit)
+    except GlusterCmdException as e:
+        action_fail("Add quota failed: {}".format(e))
 
 
 def disable_volume_quota():
     """
     Disable quotas on the volume
     """
-    volume = action_get("volume")
+    vol = action_get("volume")
     path = action_get("path")
-    quotas_enabled = volume_quotas_enabled(volume)
+    quotas_enabled = volume.volume_quotas_enabled(vol)
     if quotas_enabled.is_err():
         action_fail("Disable quota failed: {}".format(quotas_enabled.value))
     if quotas_enabled.value:
-        output = volume_remove_quota(volume, path)
-        if output.is_err():
-            # Notify the user of the failure and then return the error
-            # up the stack
-            action_fail(
-                "remove quota failed with error: {}".format(output.value))
+        try:
+            volume.volume_remove_quota(vol, path)
+        except GlusterCmdException as e:
+            action_fail("remove quota failed with error: {}".format(e))
 
 
 def list_volume_quotas():
     """
     List quotas on the volume
     """
-    volume = action_get("volume")
-    quotas_enabled = volume_quotas_enabled(volume)
+    vol = action_get("volume")
+    quotas_enabled = volume.volume_quotas_enabled(vol)
     if quotas_enabled.is_err():
         action_fail("List quota failed: {}".format(quotas_enabled.value))
     if quotas_enabled.value:
-        quotas = quota_list(volume)
+        quotas = volume.quota_list(vol)
         if quotas.is_err():
             action_fail(
                 "Failed to get volume quotas: {}".format(quotas.value))
@@ -184,19 +186,18 @@ def set_volume_options():
     """
     Set one or more options on the volume at once
     """
-    volume = action_get("volume")
+    vol = action_get("volume")
 
     # Gather all of the action parameters up at once.  We don't know what
     # the user wants to change.
     options = action_get()
     settings = []
-    for (key, value) in options:
+    for key in options:
         if key != "volume":
-            settings.append(GlusterOption(key, value))
-        else:
-            volume = value
+            settings.append(
+                volume.GlusterOption.from_str(key, options[key]))
 
-    volume_set_options(volume, settings)
+    volume.volume_set_options(vol, settings)
 
 
 # Actions to function mapping, to allow for illegal python action names that
@@ -224,7 +225,7 @@ def main(args):
         return "Action %s undefined" % action_name
     else:
         try:
-            action(args)
+            action()
         except Exception as e:
             hookenv.action_fail(str(e))
 

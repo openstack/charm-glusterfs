@@ -16,10 +16,9 @@ import sys
 import unittest
 
 import mock
-from result import Ok
-
-from lib.gluster.volume import Quota
+from lib.charm.gluster.volume import Quota
 from reactive import actions
+from result import Ok
 
 mock_apt = mock.MagicMock()
 sys.modules['apt'] = mock_apt
@@ -27,13 +26,12 @@ mock_apt.apt_pkg = mock.MagicMock()
 
 
 class Test(unittest.TestCase):
-    @mock.patch('reactive.actions.quota_list')
-    @mock.patch('reactive.actions.volume_quotas_enabled')
+    @mock.patch('reactive.actions.volume')
     @mock.patch('reactive.actions.action_get')
     @mock.patch('reactive.actions.action_set')
     def testListVolQuotas(self, _action_set, _action_get,
-                          _volume_quotas_enabled, _quota_list):
-        _quota_list.return_value = Ok(
+                          _volume):
+        _volume.quota_list.return_value = Ok(
             [Quota(path="/test1",
                    used=10,
                    avail=90,
@@ -42,7 +40,7 @@ class Test(unittest.TestCase):
                    hard_limit_exceeded=False,
                    soft_limit_exceeded=False,
                    soft_limit_percentage="80%")])
-        _volume_quotas_enabled.return_value = Ok(True)
+        _volume.volume_quotas_enabled.return_value = Ok(True)
         _action_get.return_value = "test"
         actions.list_volume_quotas()
         _action_set.assert_called_with(

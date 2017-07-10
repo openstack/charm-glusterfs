@@ -16,6 +16,23 @@ import os
 import subprocess
 from typing import Optional, Dict
 
+from charm.gluster.lib import (check_for_new_devices, run_command, Status,
+                               get_brick_list, wait_for_peers)
+# from .ctdb import VirtualIp
+# from .nfs_relation_joined import nfs_relation_joined
+from charm.gluster.peer import peer_probe, Peer
+from charm.gluster.volume import (Transport, volume_create_arbiter,
+                                  get_local_bricks, Volume,
+                                  GlusterOption, SplitBrainPolicy, Toggle,
+                                  volume_create_distributed,
+                                  volume_create_striped,
+                                  volume_create_replicated,
+                                  volume_create_striped_replicated,
+                                  volume_add_brick, volume_create_erasure,
+                                  VolumeType,
+                                  volume_enable_bitrot, volume_list,
+                                  volume_set_options,
+                                  volume_remove_brick, volume_info)
 from charmhelpers.contrib.storage.linux.ceph import filesystem_mounted
 from charmhelpers.core import hookenv, sysctl
 from charmhelpers.core.hookenv import (application_version_set, relation_id)
@@ -27,23 +44,6 @@ from charms.reactive import when, when_not, set_state, remove_state
 from gluster.cli import GlusterCmdException
 from gluster.cli.parsers import GlusterCmdOutputParseError
 from gluster.cli.volume import start
-from lib.gluster.lib import (check_for_new_devices, run_command, Status,
-                             get_brick_list, wait_for_peers)
-# from .ctdb import VirtualIp
-# from .nfs_relation_joined import nfs_relation_joined
-from lib.gluster.peer import peer_probe, Peer
-from lib.gluster.volume import (Transport, volume_create_arbiter,
-                                get_local_bricks, Volume,
-                                GlusterOption, SplitBrainPolicy, Toggle,
-                                volume_create_distributed,
-                                volume_create_striped,
-                                volume_create_replicated,
-                                volume_create_striped_replicated,
-                                volume_add_brick, volume_create_erasure,
-                                VolumeType,
-                                volume_enable_bitrot, volume_list,
-                                volume_set_options,
-                                volume_remove_brick, volume_info)
 from result import Err, Ok, Result
 
 # from .brick_detached import brick_detached
