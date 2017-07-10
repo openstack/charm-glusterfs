@@ -315,8 +315,7 @@ def get_brick_list(peers: Dict[str, Dict], volume: Optional[Volume]) -> Result:
 
     else:
         # Existing volume.  Build a differential list.
-        log("Existing volume.  Building differential brick list {} {}".format(
-            peers, volume))
+        log("Existing volume.  Building differential brick list ")
         new_peers = find_new_peers(peers, volume)
 
         if len(new_peers) < replicas:

@@ -138,8 +138,6 @@ def initialize_volume(peer) -> None:
                 else:
                     log("Volume creation failed with error: {}".format(
                         create_result.value))
-            else:
-                set_state("volume.needs.expansion")
         except GlusterCmdException as e:
             log("Volume info command failed: {}".format(e))
             return
@@ -300,7 +298,7 @@ def create_volume(peers: Dict[str, Dict],
 
 
 @when('server.bricks.available')
-@when('volume.needs.expansion')
+@when('volume.created')
 def check_for_expansion(peer) -> None:
     """
     Possibly expand an existing volume

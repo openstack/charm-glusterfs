@@ -1260,7 +1260,7 @@ def volume_add_brick(volume: str, brick_list: List[Brick],
     if not brick_list:
         raise ValueError("The brick list is empty.  Not expanding volume")
     try:
-        bricks.add(volume, brick_list, force=force)
+        bricks.add(volume, [str(b) for b in brick_list], force=force)
     except GlusterCmdException:
         raise
 
