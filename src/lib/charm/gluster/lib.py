@@ -227,7 +227,7 @@ def finish_initialization(device_path: str) -> Result:
     log("device_info: {}".format(device_info.value), INFO)
 
     # Zfs automatically handles mounting the device
-    if filesystem_type is not Zfs:
+    if filesystem_type is not filesystem_type.Zfs:
         log("Mounting block device {} at {}".format(device_path, mount_path),
             INFO)
         status_set(workload_state="maintenance",
@@ -355,7 +355,7 @@ def initialize_storage(device: BrickDevice) -> Result:
     inode_size = config("inode_size")
 
     # Format with the default XFS unless told otherwise
-    if filesystem_type is Xfs:
+    if filesystem_type is FilesystemType.Xfs:
         log("Formatting block device with XFS: {}".format(device.dev_path),
             INFO)
         status_set(workload_state="maintenance",
@@ -369,7 +369,7 @@ def initialize_storage(device: BrickDevice) -> Result:
             stripe_width=stripe_width,
         )
         return Ok(xfs.format(brick_device=device))
-    elif filesystem_type is Ext4:
+    elif filesystem_type is FilesystemType.Ext4:
         log("Formatting block device with Ext4: {}".format(device.dev_path),
             INFO)
         status_set(workload_state="maintenance",
@@ -384,7 +384,7 @@ def initialize_storage(device: BrickDevice) -> Result:
         )
         return Ok(ext4.format(brick_device=device))
 
-    elif filesystem_type is Btrfs:
+    elif filesystem_type is FilesystemType.Btrfs:
         log("Formatting block device with Btrfs: {}".format(device.dev_path),
             INFO)
         status_set(workload_state="maintenance",
@@ -396,7 +396,7 @@ def initialize_storage(device: BrickDevice) -> Result:
             node_size=0,
             metadata_profile=MetadataProfile.Single)
         return Ok(btrfs.format(brick_device=device))
-    elif filesystem_type is Zfs:
+    elif filesystem_type is FilesystemType.Zfs:
         log("Formatting block device with ZFS: {:}".format(device.dev_path),
             INFO)
         status_set(workload_state="maintenance",
@@ -408,7 +408,9 @@ def initialize_storage(device: BrickDevice) -> Result:
         )
         return Ok(zfs.format(brick_device=device))
     else:
-        log("Formatting block device with XFS: {}".format(device.dev_path),
+        log(
+            "Unknown filesystem. Defaulting to formatting with XFS: {}".format(
+                device.dev_path),
             INFO)
         status_set(workload_state="maintenance",
                    message="Formatting block device with XFS: {}".format(
