@@ -1,0 +1,10 @@
+Verified+1: Canonical CI <uosci-testing-bot@ubuntu.com>
+Code-Review+1: Alex Kavanagh <alex.kavanagh@canonical.com>
+Code-Review+2: Billy Olsen <billy.olsen@gmail.com>
+Workflow+1: Billy Olsen <billy.olsen@gmail.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Tue, 11 Jul 2017 21:40:18 +0000
+Reviewed-on: https://review.openstack.org/482173
+Project: openstack/charm-glusterfs
+Branch: refs/heads/master
