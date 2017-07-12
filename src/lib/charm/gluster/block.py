@@ -181,8 +181,8 @@ class Btrfs(Filesystem):
         handle to access it.
         """
         device = brick_device.dev_path
-        arg_list = ["mkfs.btrfs", "-m", self.metadata_profile,
-                    "-l", self.leaf_size, "-n", self.node_size,
+        arg_list = ["mkfs.btrfs", "-m", str(self.metadata_profile),
+                    "-l", self.leaf_size, "-n", str(self.node_size),
                     device]
         # Check if mkfs.btrfs is installed
         if not os.path.exists("/sbin/mkfs.btrfs"):
@@ -225,10 +225,10 @@ class Ext4(Filesystem):
         handle to access it.
         """
         device = brick_device.dev_path
-        arg_list = ["mkfs.ext4", "-m", self.reserved_blocks_percentage]
+        arg_list = ["mkfs.ext4", "-m", str(self.reserved_blocks_percentage)]
         if self.inode_size is not None:
             arg_list.append("-I")
-            arg_list.append(self.inode_size)
+            arg_list.append(str(self.inode_size))
 
         if self.stride is not None:
             arg_list.append("-E")
