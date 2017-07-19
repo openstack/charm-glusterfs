@@ -221,6 +221,8 @@ def create_volume(peers: Dict[str, Dict],
     log("Got brick list: {}".format(brick_list.value))
     log("Creating volume of type {} with brick list {}".format(
         cluster_type, [str(b) for b in brick_list.value]), INFO)
+    if not brick_list.value:
+        return Err("No block devices detected")
 
     result = None
     if cluster_type is VolumeType.Distribute:
@@ -666,9 +668,16 @@ def update_status() -> None:
 
     local_bricks = get_local_bricks(volume_name)
     if local_bricks.is_ok():
-        status_set(workload_state="active",
-                   message="Unit is ready ({} bricks)".format(
-                       len(local_bricks.value)))
+        if local_bricks.value:
+            status_set(workload_state="active",
+                       message="Unit is ready ({} bricks)".format(
+                           len(local_bricks.value)))
+        else:
+            status_set(
+                workload_state="blocked",
+                message='No block devices detected using '
+                        'current configuration')
+
         return
     else:
         status_set(workload_state="blocked",

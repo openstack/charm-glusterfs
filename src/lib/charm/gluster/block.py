@@ -652,9 +652,10 @@ def get_manual_bricks() -> Result:
     log("Gathering list of manually specified brick devices")
     brick_list = []
     manual_config_brick_devices = config("brick_devices")
-    for brick in manual_config_brick_devices.split(" "):
-        if brick is not None:
-            brick_list.append(brick)
+    if manual_config_brick_devices:
+        for brick in manual_config_brick_devices.split(" "):
+            if brick is not None:
+                brick_list.append(brick)
     log("List of manual storage brick devices: {}".format(brick_list))
     bricks = scan_devices(brick_list)
     if bricks.is_err():
