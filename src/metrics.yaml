@@ -1,4 +1,0 @@
-metrics:
-  gb-used:
-    type: gauge
-    description: Total number of GB used
